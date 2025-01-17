@@ -10,12 +10,9 @@ export const connectDb = async () => {
   }
 
   try {
-    await mongoose.connect(process.env.MONGO_URL!, {
-      dbName: "IMDb-Clone",
-      serverSelectionTimeoutMS: 5000,
-    });
+    await mongoose.connect(process.env.MONGO_URI!);
     isConnected = true;
   } catch (error) {
-    console.log("mongo connection failed", error);
+    console.log("mongoDB connection failed", error);
   }
 };

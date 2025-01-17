@@ -48,16 +48,14 @@ export async function POST(req: Request) {
     });
   }
 
-  // Do something with payload
-  // For this guide, log payload to console
   const { id } = evt?.data;
-  const eventType = evt.type;
+  const eventType = evt?.type;
 
   if (eventType === "user.created" || eventType === "user.updated") {
     const { first_name, last_name, image_url, email_addresses } = evt?.data;
     try {
       const user = await createOrUpdateUser(
-        id ?? "",
+        id,
         first_name,
         last_name,
         image_url,
@@ -66,28 +64,28 @@ export async function POST(req: Request) {
       if (user && eventType === "user.created") {
         try {
           const client = await clerkClient();
-          await client.users.updateUserMetadata(id ?? "", {
+          await client.users.updateUserMetadata(id as string, {
             publicMetadata: {
               userMongoId: user._id,
             },
           });
         } catch (error) {
-          console.log("Error: Could not update user metadata", error);
+          console.log("Error: Could not update user metadata:", error);
         }
       }
     } catch (error) {
-      console.log("Error: Could not create or update user", error);
+      console.log("Error: Could not create or update user:", error);
       return new Response("Error: Could not create or update user", {
         status: 400,
       });
     }
   }
 
-  if (eventType === "role.deleted") {
+  if (eventType === "user.deleted") {
     try {
       await deleteUser(id);
     } catch (error) {
-      console.log("Error: Could not delete user", error);
+      console.log("Error: Could not delete user:", error);
       return new Response("Error: Could not delete user", {
         status: 400,
       });
