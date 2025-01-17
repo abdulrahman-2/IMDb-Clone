@@ -1,12 +1,16 @@
 import User from "../models/user.model";
 import { connectDb } from "../mongodb/mongoose";
 
+interface EmailAddress {
+  email_address: string;
+}
+
 export const createOrUpdateUser = async (
   id: string | undefined,
   first_name: string | null,
   last_name: string | null,
   image_url: string | null,
-  email_addresses: any
+  email_addresses: EmailAddress[]
 ) => {
   try {
     await connectDb();
