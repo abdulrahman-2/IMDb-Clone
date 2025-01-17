@@ -1,6 +1,7 @@
 import Link from "next/link";
 import NavLink from "./NavLink";
 import ModeToggle from "../ModeToggle";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 const links = [
   { label: "Home", href: "/" },
@@ -12,10 +13,15 @@ const Header = () => {
   return (
     <div className="container py-3 flex justify-between items-center">
       <ul className="flex gap-5">
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
         {links.map((link) => (
           <NavLink key={link.href} link={link} className="hidden md:block" />
         ))}
-        <NavLink link={{ label: "Sign in", href: "/signin" }} />
+        <SignedOut>
+          <NavLink link={{ label: "Sign in", href: "/sign-in" }} />
+        </SignedOut>
       </ul>
       <div className="flex items-center gap-2 md:gap-4">
         <ModeToggle />
