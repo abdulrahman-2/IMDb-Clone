@@ -11,7 +11,7 @@ const links = [
 
 const Header = () => {
   return (
-    <div className="container p-3 flex justify-between items-center">
+    <div className="container p-3 sm:px-[2rem] flex justify-between items-center">
       <ul className="flex gap-5">
         <SignedIn>
           <UserButton />

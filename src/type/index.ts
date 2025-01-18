@@ -23,3 +23,8 @@ export interface MediaItem {
 }
 
 export type MediaList = MediaItem[];
+
+export interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+}
