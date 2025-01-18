@@ -5,6 +5,7 @@ import Header from "@/components/shared/Header";
 import Providers from "@/components/Providers";
 import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/shared/Navbar";
+import Footer from "@/components/shared/Footer";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function RootLayout({
             <Header />
             <Navbar />
             {children}
+            <Footer />
           </Providers>
         </body>
       </html>
