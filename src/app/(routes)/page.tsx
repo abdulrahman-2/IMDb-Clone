@@ -1,14 +1,12 @@
 import Pagination from "@/components/Pagination";
 import Results from "@/components/Results";
+import { HomeProps } from "@/type";
 
 const API_KEY = process.env.API_KEY;
 
-interface HomeProps {
-  searchParams: { page?: string };
-}
-
 const Home = async ({ searchParams }: HomeProps) => {
-  const page = searchParams.page || "1";
+  const resolvedSearchParams = await searchParams;
+  const page = resolvedSearchParams?.page || "1";
 
   const res = await fetch(
     `https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}&language=en-US&page=${page}`,

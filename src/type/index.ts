@@ -28,3 +28,7 @@ export interface PaginationProps {
   currentPage: number;
   totalPages: number;
 }
+
+export interface HomeProps {
+  searchParams: any;
+}
