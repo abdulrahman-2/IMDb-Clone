@@ -4,6 +4,7 @@ import "../globals.css";
 import Header from "@/components/shared/Header";
 import Providers from "@/components/Providers";
 import { ClerkProvider } from "@clerk/nextjs";
+import Navbar from "@/components/shared/Navbar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,6 +28,7 @@ export default function RootLayout({
         <body className={`${poppins.className} antialiased`}>
           <Providers>
             <Header />
+            <Navbar />
             {children}
           </Providers>
         </body>
