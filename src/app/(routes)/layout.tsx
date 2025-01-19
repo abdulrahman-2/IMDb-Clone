@@ -6,6 +6,8 @@ import Providers from "@/components/Providers";
 import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
+import SearchBox from "@/components/SearchBox";
+import Notifications from "@/components/Notifications";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -30,8 +32,10 @@ export default function RootLayout({
           <Providers>
             <Header />
             <Navbar />
+            <SearchBox />
             {children}
             <Footer />
+            <Notifications />
           </Providers>
         </body>
       </html>

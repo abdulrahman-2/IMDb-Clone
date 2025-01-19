@@ -32,3 +32,12 @@ export interface PaginationProps {
 export interface HomeProps {
   searchParams: any;
 }
+
+export interface UserFavorites {
+  movieId: string;
+  title: string;
+  description: string;
+  dateReleased: Date;
+  rating: number;
+  image: string;
+}

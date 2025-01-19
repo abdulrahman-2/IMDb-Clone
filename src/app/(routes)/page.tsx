@@ -9,7 +9,7 @@ const Home = async ({ searchParams }: HomeProps) => {
   const page = resolvedSearchParams?.page || "1";
 
   const res = await fetch(
-    `https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}&language=en-US&page=${page}`,
+    `https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=false`,
     {
       next: { revalidate: 60 },
     }

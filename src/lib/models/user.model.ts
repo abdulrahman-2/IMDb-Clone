@@ -1,5 +1,14 @@
 import mongoose from "mongoose";
 
+const favSchema = new mongoose.Schema({
+  movieId: { type: String, required: true },
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  dateReleased: { type: Date, required: true },
+  rating: { type: Number, required: true },
+  image: { type: String, required: true },
+});
+
 const UserSchema = new mongoose.Schema(
   {
     clerkId: { type: String, required: true, unique: true },
@@ -7,7 +16,7 @@ const UserSchema = new mongoose.Schema(
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     profilePicture: { type: String, required: true },
-    favorites: [{ type: String }],
+    favs: { type: [favSchema], default: [] },
   },
   { timestamps: true }
 );

@@ -1,5 +1,7 @@
+import AddToFav from "@/components/AddToFav";
 import Image from "next/image";
 import Link from "next/link";
+import { BiArrowBack } from "react-icons/bi";
 
 export default async function MoviePage({ params }: any) {
   const { id: movieId } = await params;
@@ -10,13 +12,17 @@ export default async function MoviePage({ params }: any) {
 
   if (!res.ok) {
     return (
-      <div className="min-h-[calc(100vh-128px)] grid place-content-center text-center mt-10">
-        <h1 className="text-xl my-5">
+      <div className="min-h-[calc(100vh-220px)] grid place-content-center text-center mt-10">
+        <h1 className="text-xl font-semibold my-5">
           Movie details are not available at the moment!
         </h1>
         {/* return home */}
         <p>
-          <Link href="/" className="hover:text-amber-600">
+          <Link
+            href="/"
+            className="hover:text-amber-600 flex items-center justify-center gap-1"
+          >
+            <BiArrowBack />
             Go Home
           </Link>
         </p>
@@ -26,15 +32,15 @@ export default async function MoviePage({ params }: any) {
 
   return (
     <div className="w-full">
-      <div className="min-h-[calc(100vh-128px)] pt-8 flex flex-col content-center container md:space-x-6">
-        <div className="relative h-[300px] sm:h-[600px] w-full">
+      <div className="min-h-[calc(100vh-220px)] pb-5 flex flex-col content-center container md:space-x-6">
+        <div className="relative h-[270px] sm:h-[600px] w-full">
           <Image
             src={`https://image.tmdb.org/t/p/original/${
               movie.backdrop_path || movie.poster_path
             }`}
             alt={movie.title || movie.name}
             fill
-            className="rounded-lg object-cover"
+            className="object-cover"
           ></Image>
         </div>
 
@@ -51,14 +57,14 @@ export default async function MoviePage({ params }: any) {
             <span className="font-semibold mr-1">Rating:</span>
             {movie.vote_count}
           </p>
-          {/* <AddToFav
+          <AddToFav
             movieId={movieId}
             title={movie.title || movie.name}
             image={movie.backdrop_path || movie.poster_path}
             overview={movie.overview}
             releaseDate={movie.release_date || movie.first_air_date}
             voteCount={movie.vote_count}
-          /> */}
+          />
         </div>
       </div>
     </div>

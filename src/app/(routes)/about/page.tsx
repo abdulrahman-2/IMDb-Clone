@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const page = () => {
   return (
-    <div className="container py-10 min-h-[calc(100vh-64px)] flex flex-col gap-8 lg:flex-row items-center justify-between">
+    <div className="container px-3 sm:px-[2rem] py-10 min-h-[calc(100vh-64px)] flex flex-col gap-8 lg:flex-row items-center justify-between">
       <div className="w-auto lg:flex-1 mx-auto">
         <div>
           <h1 className="text-3xl md:text-4xl font-semibold my-3">
