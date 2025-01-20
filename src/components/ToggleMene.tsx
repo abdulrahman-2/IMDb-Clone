@@ -38,7 +38,7 @@ const ToggleMene = ({ links }: any) => {
         {!open && (
           <CgMenuGridO
             size={40}
-            className="text-gray-50 cursor-pointer"
+            className="cursor-pointer"
             onClick={toggleMenu}
             aria-label="Open Menu"
           />
@@ -68,7 +68,7 @@ const ToggleMene = ({ links }: any) => {
           </h1>
           <nav className="list-none space-y-6 text-center">
             {links.map((link: any) => (
-              <NavLink link={link} key={link.href} />
+              <NavLink link={link} key={link.href} onClick={toggleMenu} />
             ))}
           </nav>
         </div>

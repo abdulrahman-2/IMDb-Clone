@@ -16,8 +16,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "IMDb Clone | Home",
-  description: "Home",
+  title: "IMDb Clone",
+  description: "The IMDb Clone is a movie and TV show database website.",
 };
 
 export default function RootLayout({

@@ -31,7 +31,7 @@ const footerLinks = [
 
 const Footer = () => {
   return (
-    <div className="bg-gray-900 text-gray-300 dark:bg-black/50">
+    <div className="bg-gray-900 dark:bg-black/50">
       <div className="container flex flex-col items-center justify-center py-6">
         <SignedOut>
           <Link
@@ -41,7 +41,7 @@ const Footer = () => {
             Sign in for more access
           </Link>
         </SignedOut>
-        <div className="flex flex-col md:flex-row items-center gap-5 my-5">
+        <div className="text-gray-300 flex flex-col md:flex-row items-center gap-5 my-5">
           <div className="w-[320px] md:w-[350px] flex flex-col items-center gap-4 border border-slate-700 p-3 rounded-lg">
             <h3 className="font-semibold text-xl">Follow IMDb on social</h3>
             <div className="flex text-2xl items-center gap-5 md:gap-10">

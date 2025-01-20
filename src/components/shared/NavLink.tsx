@@ -7,9 +7,11 @@ import React from "react";
 const NavLink = ({
   link,
   className,
+  onClick,
 }: {
   link: { label: string; href: string };
   className?: string;
+  onClick?: () => void;
 }) => {
   const pathName = usePathname();
   return (
@@ -19,7 +21,9 @@ const NavLink = ({
       } ${className}`}
       key={link.href}
     >
-      <Link href={link.href}>{link.label}</Link>
+      <Link href={link.href} onClick={onClick}>
+        {link.label}
+      </Link>
     </li>
   );
 };

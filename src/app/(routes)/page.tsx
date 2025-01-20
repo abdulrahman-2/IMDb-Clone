@@ -1,34 +1,36 @@
 import Pagination from "@/components/Pagination";
 import Results from "@/components/Results";
+import CardSkeleton from "@/components/CardSkeleton";
+import { Suspense } from "react";
 import { HomeProps } from "@/type";
-
-const API_KEY = process.env.API_KEY;
+import { getMovies } from "@/lib/api/api";
 
 const Home = async ({ searchParams }: HomeProps) => {
-  const resolvedSearchParams = await searchParams;
-  const page = resolvedSearchParams?.page || "1";
+  const params = await searchParams;
+  const page = params?.page || 1;
 
-  const res = await fetch(
-    `https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=false`,
-    {
-      next: { revalidate: 60 },
-    }
-  );
+  const res = await getMovies(Number(page));
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  const data = await res.json();
-  const results = data.results;
-  const totalPages = data.total_pages;
+  const { results, total_pages: totalPages } = res;
 
   return (
     <div>
-      <Results results={results} />
-      <Pagination currentPage={parseInt(page, 10)} totalPages={totalPages} />
+      <Suspense fallback={<LoadingSkeleton />}>
+        <Results results={results} />
+      </Suspense>
+      <Pagination currentPage={Number(page)} totalPages={totalPages} />
     </div>
   );
 };
+
+function LoadingSkeleton() {
+  return (
+    <div className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 sm:gap-4 container pb-5">
+      {Array.from({ length: 15 }).map((_, idx) => (
+        <CardSkeleton key={idx} />
+      ))}
+    </div>
+  );
+}
 
 export default Home;

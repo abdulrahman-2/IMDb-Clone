@@ -2,10 +2,10 @@ import Image from "next/image";
 
 const page = () => {
   return (
-    <div className="container px-3 sm:px-[2rem] py-10 min-h-[calc(100vh-64px)] flex flex-col gap-8 lg:flex-row items-center justify-between">
+    <div className="container px-3 sm:px-[2rem] pb-10 min-h-[calc(100vh-64px)] flex flex-col gap-8 lg:flex-row items-center justify-between">
       <div className="w-auto lg:flex-1 mx-auto">
         <div>
-          <h1 className="text-3xl md:text-4xl font-semibold my-3">
+          <h1 className="text-3xl md:text-4xl font-semibold mb-3">
             About IMDb Clone
           </h1>
           <div className="text-md max-w-[600px] flex flex-col gap-3">
@@ -44,13 +44,15 @@ const page = () => {
           </div>
         </div>
       </div>
-      <div className="flex-1 relative w-full h-[400px]">
-        <Image
-          src="/about.webp"
-          alt="about"
-          fill
-          className="absolute rounded-xl object-cover"
-        />
+      <div className="w-full lg:flex-1">
+        <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px]">
+          <Image
+            src="/about.webp"
+            alt="about"
+            fill
+            className="rounded-xl object-cover"
+          />
+        </div>
       </div>
     </div>
   );
