@@ -1,9 +1,14 @@
 import Pagination from "@/components/Pagination";
-import Results from "@/components/Results";
-import CardSkeleton from "@/components/CardSkeleton";
-import { Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { HomeProps } from "@/type";
 import { getMovies } from "@/lib/api/api";
+import LoadingSkeleton from "@/components/LoadingSkeleton";
+
+const Results = lazy(() =>
+  new Promise((resolve) => setTimeout(resolve, 2000)).then(
+    () => import("@/components/Results")
+  )
+);
 
 const Home = async ({ searchParams }: HomeProps) => {
   const params = await searchParams;
@@ -15,22 +20,12 @@ const Home = async ({ searchParams }: HomeProps) => {
 
   return (
     <div>
-      <Suspense fallback={<LoadingSkeleton />}>
+      <Suspense fallback={<LoadingSkeleton length={15} />}>
         <Results results={results} />
       </Suspense>
       <Pagination currentPage={Number(page)} totalPages={totalPages} />
     </div>
   );
 };
-
-function LoadingSkeleton() {
-  return (
-    <div className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 sm:gap-4 container pb-5">
-      {Array.from({ length: 15 }).map((_, idx) => (
-        <CardSkeleton key={idx} />
-      ))}
-    </div>
-  );
-}
 
 export default Home;

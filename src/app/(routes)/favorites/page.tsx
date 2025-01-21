@@ -1,10 +1,16 @@
 "use client";
 
-import Results from "@/components/Results";
+import LoadingSkeleton from "@/components/LoadingSkeleton";
 import { MediaList } from "@/type";
 import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
+
+const Results = lazy(() =>
+  new Promise((resolve) => setTimeout(resolve, 2000)).then(
+    () => import("@/components/Results")
+  )
+);
 
 const Favorites = () => {
   const [results, setResults] = useState<MediaList | null>(null);
@@ -60,17 +66,19 @@ const Favorites = () => {
           <h1 className="text-center pt-6">No results found</h1>
         ))}
       {results && results.length !== 0 && (
-        <Results
-          results={results.map((result: any) => ({
-            ...result,
-            id: result.movieId,
-            title: result.title,
-            backdrop_path: result.image,
-            overview: result.description,
-            first_air_date: result.dateReleased.substring(0, 10),
-            vote_count: result.rating,
-          }))}
-        />
+        <Suspense fallback={<LoadingSkeleton length={results.length} />}>
+          <Results
+            results={results.map((result: any) => ({
+              ...result,
+              id: result.movieId,
+              title: result.title,
+              backdrop_path: result.image,
+              overview: result.description,
+              first_air_date: result.dateReleased.substring(0, 10),
+              vote_count: result.rating,
+            }))}
+          />
+        </Suspense>
       )}
     </div>
   );
